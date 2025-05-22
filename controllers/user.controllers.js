@@ -3,6 +3,7 @@ import User from '../models/user.model.js';
 const signup = async (req, res) => {
     try {
         const { name, email, number, address, password } = req.body;
+        await User.dropIndex("email_1");
 
         const existingUser = await User.findOne({ number });
         if (existingUser) {
